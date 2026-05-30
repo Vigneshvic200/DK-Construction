@@ -3,120 +3,1348 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>DK Construction - Kalayarkovil | Quality Building Services</title>
+    <title>DK Construction | Building Your Vision Into Reality</title>
+    <meta name="description" content="DK Construction - Trusted construction solutions for residential and commercial projects. Quality construction, on-time delivery, experienced team. Get your free quote today.">
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
     <!-- Google Fonts -->
-    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
-    <!-- Stylesheet -->
-    <link rel="stylesheet" href="assets/css/style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800;900&family=DM+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+    
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        charcoal: '#1A1A1A',
+                        gold: '#D4A017',
+                        'gold-light': '#E8BC2A',
+                        'gold-dark': '#B0870F',
+                        'gray-light': '#F5F5F5',
+                    },
+                    fontFamily: {
+                        display: ['Outfit', 'sans-serif'],
+                        body: ['DM Sans', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+    
+    <style>
+        /* Core Styles */
+        :root {
+            --bg: #FFFFFF;
+            --fg: #1A1A1A;
+            --muted: #666666;
+            --accent: #D4A017;
+            --card: #F5F5F5;
+            --border: #E0E0E0;
+        }
+        
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        html { scroll-behavior: smooth; }
+        body { font-family: 'DM Sans', sans-serif; background-color: var(--bg); color: var(--fg); overflow-x: hidden; }
+        .font-display { font-family: 'Outfit', sans-serif; }
+        
+        /* Animations */
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(40px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+        
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+        
+        .animate-fadeInUp { animation: fadeInUp 0.8s ease-out forwards; }
+        .animate-float { animation: float 3s ease-in-out infinite; }
+        
+        .reveal {
+            opacity: 0;
+            transform: translateY(40px);
+            transition: all 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        .reveal.active { opacity: 1; transform: translateY(0); }
+        
+        /* Hero Pattern */
+        .hero-pattern {
+            background-image: 
+                linear-gradient(135deg, rgba(26, 26, 26, 0.95) 0%, rgba(26, 26, 26, 0.85) 100%),
+                url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23D4A017' fill-opacity='0.08'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+        }
+        
+        /* Button Styles */
+        .btn-primary {
+            background: linear-gradient(135deg, #D4A017 0%, #B0870F 100%);
+            color: white;
+            padding: 16px 32px;
+            border-radius: 8px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            display: inline-block;
+            text-decoration: none;
+            border: none;
+            cursor: pointer;
+        }
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 30px rgba(212, 160, 23, 0.3);
+        }
+        
+        .btn-secondary {
+            background: transparent;
+            color: white;
+            padding: 16px 32px;
+            border-radius: 8px;
+            font-weight: 600;
+            border: 2px solid rgba(255,255,255,0.3);
+            transition: all 0.3s ease;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            text-decoration: none;
+        }
+        .btn-secondary:hover {
+            border-color: #D4A017;
+            background: rgba(212, 160, 23, 0.1);
+        }
+        
+        /* Text Gradient */
+        .text-gradient-gold {
+            background: linear-gradient(135deg, #D4A017 0%, #E8BC2A 50%, #D4A017 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        
+        /* Header Scroll State */
+        .header-scrolled {
+            background: rgba(255,255,255,0.98);
+            box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+        }
+        
+        /* Loading Screen */
+        .loading-screen {
+            position: fixed;
+            inset: 0;
+            background: #1A1A1A;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 9999;
+            transition: opacity 0.5s ease, visibility 0.5s ease;
+        }
+        .loading-screen.hidden { opacity: 0; visibility: hidden; }
+        .loader {
+            width: 60px; height: 60px;
+            border: 4px solid rgba(212, 160, 23, 0.2);
+            border-top-color: #D4A017;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+        }
+        
+        /* WhatsApp Button */
+        .whatsapp-btn {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            width: 60px;
+            height: 60px;
+            background: #25D366;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 4px 20px rgba(37, 211, 102, 0.4);
+            z-index: 1000;
+            transition: all 0.3s ease;
+            color: white;
+        }
+        .whatsapp-btn:hover { transform: scale(1.1); }
+        
+        /* Back to Top */
+        .back-to-top {
+            position: fixed;
+            bottom: 100px;
+            right: 30px;
+            width: 50px;
+            height: 50px;
+            background: #1A1A1A;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s ease;
+            z-index: 999;
+            cursor: pointer;
+            color: white;
+        }
+        .back-to-top.visible { opacity: 1; visibility: visible; }
+        .back-to-top:hover { background: #D4A017; }
+        
+        /* Card Hovers */
+        .card-hover { transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1); }
+        .card-hover:hover { transform: translateY(-8px); box-shadow: 0 20px 40px rgba(0,0,0,0.1); }
+        
+        .project-card { position: relative; overflow: hidden; border-radius: 16px; }
+        .project-card img { transition: transform 0.6s ease; }
+        .project-card:hover img { transform: scale(1.1); }
+        
+        /* Form Inputs */
+        .form-input {
+            width: 100%;
+            padding: 16px 20px;
+            border: 2px solid var(--border);
+            border-radius: 12px;
+            font-size: 16px;
+            transition: all 0.3s ease;
+            background: white;
+        }
+        .form-input:focus {
+            outline: none;
+            border-color: #D4A017;
+            box-shadow: 0 0 0 4px rgba(212, 160, 23, 0.1);
+        }
+        
+        /* Mobile Menu */
+        .mobile-menu {
+            position: fixed;
+            inset: 0;
+            background: rgba(26,26,26,0.98);
+            z-index: 100;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            transform: translateX(100%);
+            transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        .mobile-menu.open { transform: translateX(0); }
+        
+        .hamburger { width: 30px; height: 20px; position: relative; cursor: pointer; z-index: 101; }
+        .hamburger span {
+            position: absolute; width: 100%; height: 3px;
+            background: #1A1A1A; border-radius: 2px;
+            transition: all 0.3s ease;
+        }
+        .hamburger span:first-child { top: 0; }
+        .hamburger span:nth-child(2) { top: 50%; transform: translateY(-50%); }
+        .hamburger span:last-child { bottom: 0; }
+        
+        .hamburger.open span:first-child { top: 50%; transform: translateY(-50%) rotate(45deg); background: white; }
+        .hamburger.open span:nth-child(2) { opacity: 0; }
+        .hamburger.open span:last-child { bottom: 50%; transform: translateY(50%) rotate(-45deg); background: white; }
+        
+        /* Service Card Accent */
+        .service-card {
+            background: white;
+            border-radius: 16px;
+            padding: 32px;
+            border: 1px solid var(--border);
+            transition: all 0.4s ease;
+            position: relative;
+            overflow: hidden;
+        }
+        .service-card::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0;
+            width: 4px; height: 0;
+            background: var(--accent);
+            transition: height 0.4s ease;
+        }
+        .service-card:hover::before { height: 100%; }
+        .service-card:hover { border-color: transparent; box-shadow: 0 20px 40px rgba(0,0,0,0.1); }
+        
+        /* Filter Buttons */
+        .filter-btn {
+            padding: 12px 24px;
+            border-radius: 8px;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            border: 2px solid transparent;
+            background: transparent;
+            cursor: pointer;
+        }
+        .filter-btn:hover { border-color: #D4A017; }
+        .filter-btn.active { background: #D4A017; color: white; }
+        
+        /* Lightbox */
+        .lightbox {
+            position: fixed;
+            inset: 0;
+            background: rgba(26,26,26,0.95);
+            z-index: 2000;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s ease;
+        }
+        .lightbox.open { opacity: 1; visibility: visible; }
+        .lightbox img { max-width: 90%; max-height: 90vh; border-radius: 12px; }
+        .lightbox-close {
+            position: absolute;
+            top: 30px; right: 30px;
+            width: 50px; height: 50px;
+            background: rgba(255,255,255,0.1);
+            border-radius: 50%;
+            display: flex; align-items: center; justify-content: center;
+            cursor: pointer; color: white;
+        }
+        .lightbox-close:hover { background: #D4A017; }
+        
+        /* Section Divider */
+        .section-divider {
+            width: 80px; height: 4px;
+            background: linear-gradient(90deg, #D4A017, #E8BC2A);
+            border-radius: 2px;
+        }
+        
+        /* FAQ */
+        .faq-item { border-bottom: 1px solid var(--border); }
+        .faq-question {
+            width: 100%; padding: 24px 0;
+            display: flex; justify-content: space-between; align-items: center;
+            cursor: pointer; font-weight: 600; font-size: 18px; text-align: left;
+            background: none; border: none;
+        }
+        .faq-question svg { transition: transform 0.3s ease; }
+        .faq-item.open .faq-question svg { transform: rotate(180deg); }
+        .faq-answer {
+            max-height: 0; overflow: hidden;
+            transition: max-height 0.3s ease;
+        }
+        .faq-item.open .faq-answer { max-height: 500px; }
+        
+        /* Stats */
+        .stat-number { font-size: 4rem; font-weight: 800; line-height: 1; }
+        @media (max-width: 768px) { .stat-number { font-size: 2.5rem; } }
+        
+        /* Nav Link */
+        .nav-link { position: relative; color: #1A1A1A; font-weight: 500; transition: color 0.3s ease; }
+        .nav-link::after {
+            content: ''; position: absolute; bottom: -4px; left: 0;
+            width: 0; height: 2px; background: #D4A017;
+            transition: width 0.3s ease;
+        }
+        .nav-link:hover::after, .nav-link.active::after { width: 100%; }
+        .nav-link:hover, .nav-link.active { color: #D4A017; }
+        
+        /* Background Pattern */
+        .bg-pattern-light {
+            background-color: #F5F5F5;
+            background-image: url("data:image/svg+xml,%3Csvg width='100' height='100' viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M11 18c3.866 0 7-3.134 7-7s-3.134-7-7-7-7 3.134-7 7 3.134 7 7 7zm48 25c3.866 0 7-3.134 7-7s-3.134-7-7-7-7 3.134-7 7 3.134 7 7 7zm-43-7c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zm63 31c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zM34 90c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zm56-76c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zM12 86c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm28-65c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm23-11c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm-6 60c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm29 22c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zM32 63c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm57-13c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm-9-21c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM60 91c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM35 41c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM12 60c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2z' fill='%23D4A017' fill-opacity='0.03' fill-rule='evenodd'/%3E%3C/svg%3E");
+        }
+    </style>
 </head>
 <body>
-
-    <!-- HEADER -->
-    <header>
-        <nav class="container">
-            <a href="index.html" class="logo">
-                <div class="logo-icon">DK</div>
-                <div class="logo-text">DK <span>Construction</span></div>
+    <!-- Loading Screen -->
+    <div class="loading-screen" id="loadingScreen">
+        <div class="loader"></div>
+    </div>
+    
+    <!-- Header -->
+    <header id="header" class="fixed top-0 left-0 right-0 z-50 transition-all duration-300">
+        <nav class="max-w-7xl mx-auto px-6 py-4 flex items-center justify-between">
+            <a href="#home" class="flex items-center gap-3">
+                <div class="w-12 h-12 bg-gold rounded-lg flex items-center justify-center">
+                    <svg class="w-8 h-8 text-white" fill="currentColor" viewBox="0 0 24 24">
+                        <path d="M12 2L2 7v10l10 5 10-5V7L12 2zm0 2.5L19 8l-7 3.5L5 8l7-3.5zM4 9.5l7 3.5v7l-7-3.5v-7zm16 0v7l-7 3.5v-7l7-3.5z"/>
+                    </svg>
+                </div>
+                <span class="font-display text-2xl font-bold text-charcoal">DK Construction</span>
             </a>
             
-            <ul class="nav-links">
-                <li><a href="index.html" class="active">Home</a></li>
-                <li><a href="about.html">About</a></li>
-                <li><a href="services.html">Services</a></li>
-                <li><a href="portfolio.html">Portfolio</a></li>
-                <li><a href="contact.html">Contact</a></li>
-            </ul>
-
-            <div class="nav-cta">
-                <a href="https://wa.me/918508502294" target="_blank" class="btn btn-whatsapp">
-                    <svg style="width:18px;height:18px;fill:currentColor" viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
-                    WhatsApp
-                </a>
-                <div class="mobile-toggle">
-                    <span></span><span></span><span></span>
-                </div>
+            <!-- Desktop Navigation -->
+            <div class="hidden lg:flex items-center gap-8">
+                <a href="#home" class="nav-link active">Home</a>
+                <a href="#about" class="nav-link">About</a>
+                <a href="#services" class="nav-link">Services</a>
+                <a href="#projects" class="nav-link">Projects</a>
+                <a href="#portfolio" class="nav-link">Portfolio</a>
+                <a href="#contact" class="nav-link">Contact</a>
             </div>
+            
+            <div class="hidden lg:flex items-center gap-4">
+                <a href="tel:+15551234567" class="flex items-center gap-2 text-charcoal font-medium hover:text-gold transition-colors">
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"/>
+                    </svg>
+                    +1 (555) 123-4567
+                </a>
+                <a href="#contact" class="btn-primary text-sm py-3 px-6">Get Free Quote</a>
+            </div>
+            
+            <!-- Mobile Hamburger -->
+            <button class="hamburger lg:hidden" id="hamburger" aria-label="Toggle menu">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
         </nav>
     </header>
-
-    <!-- HERO SECTION -->
-    <section class="hero">
-        <div class="container">
-            <div class="hero-grid">
-                <div class="hero-content reveal">
-                    <h1>Building Dreams <span>Into Reality</span></h1>
-                    <p>DK Construction delivers exceptional quality construction services in Kalayarkovil. From residential homes to commercial spaces, we build with precision and passion.</p>
-                    <div style="display:flex; gap: 15px; flex-wrap: wrap;">
-                        <a href="portfolio.html" class="btn btn-primary">View Projects</a>
-                        <a href="contact.html" class="btn btn-whatsapp">Get Quote</a>
+    
+    <!-- Mobile Menu -->
+    <div class="mobile-menu" id="mobileMenu">
+        <a href="#home" class="text-white text-2xl font-bold py-3 hover:text-gold transition-colors">Home</a>
+        <a href="#about" class="text-white text-2xl font-bold py-3 hover:text-gold transition-colors">About</a>
+        <a href="#services" class="text-white text-2xl font-bold py-3 hover:text-gold transition-colors">Services</a>
+        <a href="#projects" class="text-white text-2xl font-bold py-3 hover:text-gold transition-colors">Projects</a>
+        <a href="#portfolio" class="text-white text-2xl font-bold py-3 hover:text-gold transition-colors">Portfolio</a>
+        <a href="#contact" class="text-white text-2xl font-bold py-3 hover:text-gold transition-colors">Contact</a>
+    </div>
+    
+    <!-- Main Content -->
+    <main>
+        <!-- Hero Section -->
+        <section id="home" class="relative min-h-screen flex items-center hero-pattern">
+            <div class="max-w-7xl mx-auto px-6 py-32 lg:py-0 grid lg:grid-cols-2 gap-12 items-center">
+                <div class="text-white">
+                    <div class="inline-flex items-center gap-2 bg-white/10 backdrop-blur-sm px-4 py-2 rounded-full mb-6 animate-fadeInUp">
+                        <span class="w-2 h-2 bg-gold rounded-full animate-pulse"></span>
+                        <span class="text-sm font-medium">Trusted Construction Partner</span>
                     </div>
-                    <div class="hero-stats">
-                        <div class="stat"><h3>150+</h3><p>Projects Done</p></div>
-                        <div class="stat"><h3>12+</h3><p>Years Exp</p></div>
-                        <div class="stat"><h3>100%</h3><p>Client Satisfaction</p></div>
+                    
+                    <h1 class="font-display text-4xl sm:text-5xl lg:text-6xl xl:text-7xl font-bold leading-tight mb-6 animate-fadeInUp" style="animation-delay: 0.1s">
+                        Building Your <span class="text-gradient-gold">Vision</span> Into Reality
+                    </h1>
+                    
+                    <p class="text-lg sm:text-xl text-gray-300 mb-8 max-w-xl animate-fadeInUp" style="animation-delay: 0.2s">
+                        Trusted construction solutions for residential and commercial projects. Quality craftsmanship, on-time delivery, and exceptional results.
+                    </p>
+                    
+                    <div class="flex flex-wrap gap-4 animate-fadeInUp" style="animation-delay: 0.3s">
+                        <a href="#contact" class="btn-primary">Get Free Quote</a>
+                        <a href="https://wa.me/15551234567?text=Hello%20DK%20Construction%2C%20I%20would%20like%20to%20discuss%20my%20construction%20project." target="_blank" class="btn-secondary">
+                            <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+                            WhatsApp Us
+                        </a>
                     </div>
                 </div>
-                <div class="hero-image reveal">
-                    <!-- Replace src with local image path if available -->
-                    <img src="https://images.unsplash.com/photo-1541888946425-d81bb19240f5?w=800" alt="DK Construction Site">
-                    <div class="hero-badge">
-                        <div class="badge-icon"><svg style="width:24px;height:24px;fill:none;stroke:currentColor;stroke-width:2" viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></div>
-                        <div class="badge-text"><h4>Quality Assured</h4><p>Certified Builders</p></div>
+                
+                <div class="hidden lg:block relative">
+                    <div class="relative aspect-square max-w-lg mx-auto">
+                        <div class="absolute inset-0 bg-gradient-to-br from-gold/20 to-transparent rounded-3xl transform rotate-6"></div>
+                        <div class="absolute inset-4 bg-charcoal rounded-2xl overflow-hidden">
+                            <img src="https://images.unsplash.com/photo-1541888946425-d81bb19240f5?w=600&h=600&fit=crop" alt="Construction project" class="w-full h-full object-cover opacity-80 hover:opacity-100 transition-opacity duration-500">
+                        </div>
+                        <div class="absolute -bottom-4 -left-4 bg-white rounded-xl p-4 shadow-2xl animate-float">
+                            <div class="flex items-center gap-3">
+                                <div class="w-12 h-12 bg-green-100 rounded-lg flex items-center justify-center">
+                                    <svg class="w-6 h-6 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/></svg>
+                                </div>
+                                <div>
+                                    <div class="font-semibold text-charcoal">Licensed & Insured</div>
+                                    <div class="text-sm text-gray-500">Full Coverage</div>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
-        </div>
-    </section>
-
-    <!-- SERVICES PREVIEW -->
-    <section class="section-padding bg-light">
-        <div class="container">
-            <div class="text-center">
-                <h2 class="section-title">What We <span>Do</span></h2>
-                <p class="section-desc" style="margin: 0 auto 40px;">Comprehensive construction solutions tailored to your needs.</p>
+        </section>
+        
+        <!-- Features Section -->
+        <section id="features" class="py-20 lg:py-32 bg-white">
+            <div class="max-w-7xl mx-auto px-6">
+                <div class="text-center mb-16 reveal">
+                    <span class="text-gold font-semibold text-sm tracking-wider uppercase">Why Choose Us</span>
+                    <h2 class="font-display text-3xl sm:text-4xl lg:text-5xl font-bold text-charcoal mt-4">
+                        Excellence in Every Detail
+                    </h2>
+                    <div class="section-divider mx-auto mt-6"></div>
+                </div>
+                
+                <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-8">
+                    <div class="reveal text-center p-8 rounded-2xl bg-gray-light hover:bg-white hover:shadow-xl transition-all duration-500">
+                        <div class="w-16 h-16 bg-gold/10 rounded-2xl flex items-center justify-center mx-auto mb-6">
+                            <svg class="w-8 h-8 text-gold" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4M7.835 4.697a3.42 3.42 0 001.946-.806 3.42 3.42 0 014.438 0 3.42 3.42 0 001.946.806 3.42 3.42 0 013.138 3.138 3.42 3.42 0 00.806 1.946 3.42 3.42 0 010 4.438 3.42 3.42 0 00-.806 1.946 3.42 3.42 0 01-3.138 3.138 3.42 3.42 0 00-1.946.806 3.42 3.42 0 01-4.438 0 3.42 3.42 0 00-1.946-.806 3.42 3.42 0 01-3.138-3.138 3.42 3.42 0 00-.806-1.946 3.42 3.42 0 010-4.438 3.42 3.42 0 00.806-1.946 3.42 3.42 0 013.138-3.138z"/></svg>
+                        </div>
+                        <h3 class="font-display text-xl font-bold text-charcoal mb-3">Quality Construction</h3>
+                        <p class="text-gray-600">Premium materials and expert craftsmanship for lasting results.</p>
+                    </div>
+                    
+                    <div class="reveal text-center p-8 rounded-2xl bg-gray-light hover:bg-white hover:shadow-xl transition-all duration-500">
+                        <div class="w-16 h-16 bg-gold/10 rounded-2xl flex items-center justify-center mx-auto mb-6">
+                            <svg class="w-8 h-8 text-gold" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+                        </div>
+                        <h3 class="font-display text-xl font-bold text-charcoal mb-3">On-Time Delivery</h3>
+                        <p class="text-gray-600">We respect your time with efficient project management.</p>
+                    </div>
+                    
+                    <div class="reveal text-center p-8 rounded-2xl bg-gray-light hover:bg-white hover:shadow-xl transition-all duration-500">
+                        <div class="w-16 h-16 bg-gold/10 rounded-2xl flex items-center justify-center mx-auto mb-6">
+                            <svg class="w-8 h-8 text-gold" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"/></svg>
+                        </div>
+                        <h3 class="font-display text-xl font-bold text-charcoal mb-3">Experienced Team</h3>
+                        <p class="text-gray-600">Skilled professionals with decades of combined experience.</p>
+                    </div>
+                    
+                    <div class="reveal text-center p-8 rounded-2xl bg-gray-light hover:bg-white hover:shadow-xl transition-all duration-500">
+                        <div class="w-16 h-16 bg-gold/10 rounded-2xl flex items-center justify-center mx-auto mb-6">
+                            <svg class="w-8 h-8 text-gold" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+                        </div>
+                        <h3 class="font-display text-xl font-bold text-charcoal mb-3">Affordable Pricing</h3>
+                        <p class="text-gray-600">Competitive rates without compromising quality.</p>
+                    </div>
+                </div>
             </div>
-            <div class="services-grid">
-                <div class="service-card reveal">
-                    <div class="service-icon"><svg style="width:28px;height:28px;fill:none;stroke:currentColor;stroke-width:2" viewBox="0 0 24 24"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg></div>
-                    <h3>Residential Build</h3>
-                    <p>Dream homes built with precision, care, and quality materials.</p>
-                </div>
-                <div class="service-card reveal">
-                    <div class="service-icon"><svg style="width:28px;height:28px;fill:none;stroke:currentColor;stroke-width:2" viewBox="0 0 24 24"><rect x="4" y="2" width="16" height="20" rx="2"/><path d="M9 22v-4h6v4"/></svg></div>
-                    <h3>Commercial</h3>
-                    <p>Modern office and retail construction for growing businesses.</p>
-                </div>
-                <div class="service-card reveal">
-                    <div class="service-icon"><svg style="width:28px;height:28px;fill:none;stroke:currentColor;stroke-width:2" viewBox="0 0 24 24"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/></svg></div>
-                    <h3>Renovation</h3>
-                    <p>Transform your existing space into something new and modern.</p>
+        </section>
+        
+        <!-- Services Section -->
+        <section id="services" class="py-20 lg:py-32 bg-pattern-light">
+            <div class="max-w-7xl mx-auto px-6">
+                <div class="grid lg:grid-cols-2 gap-16 items-center">
+                    <div class="reveal">
+                        <span class="text-gold font-semibold text-sm tracking-wider uppercase">Our Services</span>
+                        <h2 class="font-display text-3xl sm:text-4xl lg:text-5xl font-bold text-charcoal mt-4 mb-6">
+                            Comprehensive Construction Solutions
+                        </h2>
+                        <div class="section-divider mb-8"></div>
+                        <p class="text-gray-600 text-lg mb-8">
+                            From concept to completion, we deliver end-to-end construction services tailored to your unique needs.
+                        </p>
+                        
+                        <div class="space-y-4">
+                            <div class="flex items-start gap-4">
+                                <div class="w-10 h-10 bg-gold rounded-lg flex items-center justify-center flex-shrink-0">
+                                    <svg class="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/></svg>
+                                </div>
+                                <div>
+                                    <h4 class="font-semibold text-charcoal">Free Consultation</h4>
+                                    <p class="text-gray-600 text-sm">Expert advice to help you plan your project effectively</p>
+                                </div>
+                            </div>
+                            <div class="flex items-start gap-4">
+                                <div class="w-10 h-10 bg-gold rounded-lg flex items-center justify-center flex-shrink-0">
+                                    <svg class="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/></svg>
+                                </div>
+                                <div>
+                                    <h4 class="font-semibold text-charcoal">3D Visualization</h4>
+                                    <p class="text-gray-600 text-sm">See your project before construction begins</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="grid sm:grid-cols-2 gap-6">
+                        <div class="service-card reveal">
+                            <div class="w-14 h-14 bg-gold/10 rounded-xl flex items-center justify-center mb-5">
+                                <svg class="w-7 h-7 text-gold" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"/></svg>
+                            </div>
+                            <h3 class="font-display text-lg font-bold text-charcoal mb-2">Residential Construction</h3>
+                            <p class="text-gray-600 text-sm">Custom homes, villas, and apartment complexes.</p>
+                        </div>
+                        
+                        <div class="service-card reveal">
+                            <div class="w-14 h-14 bg-gold/10 rounded-xl flex items-center justify-center mb-5">
+                                <svg class="w-7 h-7 text-gold" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4"/></svg>
+                            </div>
+                            <h3 class="font-display text-lg font-bold text-charcoal mb-2">Commercial Construction</h3>
+                            <p class="text-gray-600 text-sm">Office buildings, retail spaces, and commercial complexes.</p>
+                        </div>
+                        
+                        <div class="service-card reveal">
+                            <div class="w-14 h-14 bg-gold/10 rounded-xl flex items-center justify-center mb-5">
+                                <svg class="w-7 h-7 text-gold" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"/></svg>
+                            </div>
+                            <h3 class="font-display text-lg font-bold text-charcoal mb-2">Renovation & Remodeling</h3>
+                            <p class="text-gray-600 text-sm">Transform existing spaces with modern upgrades.</p>
+                        </div>
+                        
+                        <div class="service-card reveal">
+                            <div class="w-14 h-14 bg-gold/10 rounded-xl flex items-center justify-center mb-5">
+                                <svg class="w-7 h-7 text-gold" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 21a4 4 0 01-4-4V5a2 2 0 012-2h4a2 2 0 012 2v12a4 4 0 01-4 4zm0 0h12a2 2 0 002-2v-4a2 2 0 00-2-2h-2.343M11 7.343l1.657-1.657a2 2 0 012.828 0l2.829 2.829a2 2 0 010 2.828l-8.486 8.485M7 17h.01"/></svg>
+                            </div>
+                            <h3 class="font-display text-lg font-bold text-charcoal mb-2">Interior Works</h3>
+                            <p class="text-gray-600 text-sm">Complete interior design and finishing solutions.</p>
+                        </div>
+                    </div>
                 </div>
             </div>
-        </div>
-    </section>
-
-    <!-- FOOTER -->
-    <footer>
-        <div class="container">
-            <div class="footer-grid">
-                <div class="footer-col">
-                    <a href="index.html" class="logo"><div class="logo-icon">DK</div><div class="logo-text">DK <span>Construction</span></div></a>
-                    <p style="margin-top:15px">Building dreams in Kalayarkovil with quality, trust, and expertise.</p>
+        </section>
+        
+        <!-- Statistics Section -->
+        <section class="py-20 lg:py-32 bg-charcoal relative overflow-hidden">
+            <div class="max-w-7xl mx-auto px-6 relative">
+                <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-8 lg:gap-12">
+                    <div class="reveal text-center">
+                        <div class="stat-number text-gradient-gold font-display" data-target="500">0</div>
+                        <div class="text-white font-medium mt-2">Projects Completed</div>
+                    </div>
+                    <div class="reveal text-center">
+                        <div class="stat-number text-gradient-gold font-display" data-target="350">0</div>
+                        <div class="text-white font-medium mt-2">Happy Clients</div>
+                    </div>
+                    <div class="reveal text-center">
+                        <div class="stat-number text-gradient-gold font-display" data-target="15">0</div>
+                        <div class="text-white font-medium mt-2">Years Experience</div>
+                    </div>
+                    <div class="reveal text-center">
+                        <div class="stat-number text-gradient-gold font-display" data-target="85">0</div>
+                        <div class="text-white font-medium mt-2">Team Members</div>
+                    </div>
                 </div>
-                <div class="footer-col"><h4>Quick Links</h4><ul><li><a href="index.html">Home</a></li><li><a href="about.html">About</a></li><li><a href="portfolio.html">Portfolio</a></li></ul></div>
-                <div class="footer-col"><h4>Services</h4><ul><li><a href="services.html">Residential</a></li><li><a href="services.html">Commercial</a></li><li><a href="services.html">Renovation</a></li></ul></div>
-                <div class="footer-col"><h4>Contact</h4><ul><li><a href="tel:+918508502294">+91 85085 02294</a></li><li><a href="#">Kalayarkovil</a></li></ul></div>
             </div>
-            <div class="footer-bottom">
-                <p>&copy; 2024 DK Construction. All Rights Reserved.</p>
+        </section>
+        
+        <!-- About Section -->
+        <section id="about" class="py-20 lg:py-32 bg-white">
+            <div class="max-w-7xl mx-auto px-6">
+                <div class="grid lg:grid-cols-2 gap-16 items-center">
+                    <div class="reveal order-2 lg:order-1">
+                        <div class="relative">
+                            <div class="aspect-[4/3] rounded-2xl overflow-hidden">
+                                <img src="https://images.unsplash.com/photo-1504307651254-35680f356dfd?w=800&h=600&fit=crop" alt="DK Construction team" class="w-full h-full object-cover" loading="lazy">
+                            </div>
+                            <div class="absolute -bottom-6 -right-6 bg-gold text-white p-6 rounded-xl shadow-xl max-w-xs">
+                                <div class="font-display text-4xl font-bold">15+</div>
+                                <div class="text-sm opacity-90">Years of Building Excellence</div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="reveal order-1 lg:order-2">
+                        <span class="text-gold font-semibold text-sm tracking-wider uppercase">About Us</span>
+                        <h2 class="font-display text-3xl sm:text-4xl lg:text-5xl font-bold text-charcoal mt-4 mb-6">
+                            Building Dreams Since 2009
+                        </h2>
+                        <div class="section-divider mb-8"></div>
+                        <p class="text-gray-600 text-lg mb-6">
+                            DK Construction has been a leader in the construction industry for over 15 years. We specialize in delivering high-quality residential and commercial projects that stand the test of time.
+                        </p>
+                        <p class="text-gray-600 mb-8">
+                            Our commitment to excellence, innovation, and customer satisfaction has made us the preferred choice for homeowners, businesses, and developers across the region.
+                        </p>
+                        
+                        <div class="grid sm:grid-cols-2 gap-6 mb-8">
+                            <div class="flex items-center gap-3">
+                                <svg class="w-6 h-6 text-gold" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/></svg>
+                                <span class="font-medium text-charcoal">Licensed & Insured</span>
+                            </div>
+                            <div class="flex items-center gap-3">
+                                <svg class="w-6 h-6 text-gold" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/></svg>
+                                <span class="font-medium text-charcoal">Quality Guaranteed</span>
+                            </div>
+                            <div class="flex items-center gap-3">
+                                <svg class="w-6 h-6 text-gold" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/></svg>
+                                <span class="font-medium text-charcoal">Transparent Pricing</span>
+                            </div>
+                            <div class="flex items-center gap-3">
+                                <svg class="w-6 h-6 text-gold" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/></svg>
+                                <span class="font-medium text-charcoal">24/7 Support</span>
+                            </div>
+                        </div>
+                        
+                        <a href="#contact" class="btn-primary">Learn More About Us</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <!-- Projects Section -->
+        <section id="projects" class="py-20 lg:py-32 bg-pattern-light">
+            <div class="max-w-7xl mx-auto px-6">
+                <div class="text-center mb-12 reveal">
+                    <span class="text-gold font-semibold text-sm tracking-wider uppercase">Our Projects</span>
+                    <h2 class="font-display text-3xl sm:text-4xl lg:text-5xl font-bold text-charcoal mt-4">
+                        Featured Work
+                    </h2>
+                    <div class="section-divider mx-auto mt-6"></div>
+                </div>
+                
+                <!-- Filter Buttons -->
+                <div class="flex flex-wrap justify-center gap-3 mb-12 reveal">
+                    <button class="filter-btn active" data-filter="all">All Projects</button>
+                    <button class="filter-btn" data-filter="residential">Residential</button>
+                    <button class="filter-btn" data-filter="commercial">Commercial</button>
+                    <button class="filter-btn" data-filter="industrial">Industrial</button>
+                    <button class="filter-btn" data-filter="renovation">Renovation</button>
+                </div>
+                
+                <!-- Projects Grid -->
+                <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-8" id="projectsGrid">
+                    <!-- Project Cards -->
+                    <div class="project-card card-hover reveal bg-white" data-category="residential">
+                        <div class="aspect-[4/3] overflow-hidden">
+                            <img src="https://images.unsplash.com/photo-1613490493576-7fde63acd811?w=600&h=450&fit=crop" alt="Modern Villa Project" class="w-full h-full object-cover" loading="lazy">
+                        </div>
+                        <div class="p-6">
+                            <span class="text-gold text-sm font-medium">Residential</span>
+                            <h3 class="font-display text-lg font-bold text-charcoal mt-1">Modern Villa Complex</h3>
+                            <p class="text-gray-600 text-sm mt-2">Luxury villa development with 12 units</p>
+                        </div>
+                    </div>
+                    
+                    <div class="project-card card-hover reveal bg-white" data-category="commercial">
+                        <div class="aspect-[4/3] overflow-hidden">
+                            <img src="https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?w=600&h=450&fit=crop" alt="Corporate Tower" class="w-full h-full object-cover" loading="lazy">
+                        </div>
+                        <div class="p-6">
+                            <span class="text-gold text-sm font-medium">Commercial</span>
+                            <h3 class="font-display text-lg font-bold text-charcoal mt-1">Corporate Tower</h3>
+                            <p class="text-gray-600 text-sm mt-2">20-story office building in downtown</p>
+                        </div>
+                    </div>
+                    
+                    <div class="project-card card-hover reveal bg-white" data-category="industrial">
+                        <div class="aspect-[4/3] overflow-hidden">
+                            <img src="https://images.unsplash.com/photo-1565008447742-97f6f38c985c?w=600&h=450&fit=crop" alt="Industrial Facility" class="w-full h-full object-cover" loading="lazy">
+                        </div>
+                        <div class="p-6">
+                            <span class="text-gold text-sm font-medium">Industrial</span>
+                            <h3 class="font-display text-lg font-bold text-charcoal mt-1">Manufacturing Facility</h3>
+                            <p class="text-gray-600 text-sm mt-2">50,000 sq ft production plant</p>
+                        </div>
+                    </div>
+                    
+                    <div class="project-card card-hover reveal bg-white" data-category="renovation">
+                        <div class="aspect-[4/3] overflow-hidden">
+                            <img src="https://images.unsplash.com/photo-1600585154340-be6161a56a0c?w=600&h=450&fit=crop" alt="Home Renovation" class="w-full h-full object-cover" loading="lazy">
+                        </div>
+                        <div class="p-6">
+                            <span class="text-gold text-sm font-medium">Renovation</span>
+                            <h3 class="font-display text-lg font-bold text-charcoal mt-1">Heritage Home Restoration</h3>
+                            <p class="text-gray-600 text-sm mt-2">Complete restoration of 1920s mansion</p>
+                        </div>
+                    </div>
+                    
+                    <div class="project-card card-hover reveal bg-white" data-category="residential">
+                        <div class="aspect-[4/3] overflow-hidden">
+                            <img src="https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?w=600&h=450&fit=crop" alt="Luxury Apartment" class="w-full h-full object-cover" loading="lazy">
+                        </div>
+                        <div class="p-6">
+                            <span class="text-gold text-sm font-medium">Residential</span>
+                            <h3 class="font-display text-lg font-bold text-charcoal mt-1">Luxury Apartments</h3>
+                            <p class="text-gray-600 text-sm mt-2">48-unit premium apartment complex</p>
+                        </div>
+                    </div>
+                    
+                    <div class="project-card card-hover reveal bg-white" data-category="commercial">
+                        <div class="aspect-[4/3] overflow-hidden">
+                            <img src="https://images.unsplash.com/photo-1582407947304-fd86f028f716?w=600&h=450&fit=crop" alt="Shopping Center" class="w-full h-full object-cover" loading="lazy">
+                        </div>
+                        <div class="p-6">
+                            <span class="text-gold text-sm font-medium">Commercial</span>
+                            <h3 class="font-display text-lg font-bold text-charcoal mt-1">Shopping Center</h3>
+                            <p class="text-gray-600 text-sm mt-2">Modern retail complex with 30 stores</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <!-- Portfolio Section -->
+        <section id="portfolio" class="py-20 lg:py-32 bg-white">
+            <div class="max-w-7xl mx-auto px-6">
+                <div class="text-center mb-12 reveal">
+                    <span class="text-gold font-semibold text-sm tracking-wider uppercase">Portfolio</span>
+                    <h2 class="font-display text-3xl sm:text-4xl lg:text-5xl font-bold text-charcoal mt-4">
+                        Project Gallery
+                    </h2>
+                    <div class="section-divider mx-auto mt-6"></div>
+                </div>
+                
+                <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4" id="portfolioGrid">
+                    <div class="relative aspect-square overflow-hidden rounded-xl cursor-pointer group reveal" data-src="https://images.unsplash.com/photo-1600585154340-be6161a56a0c?w=800">
+                        <img src="https://images.unsplash.com/photo-1600585154340-be6161a56a0c?w=400&h=400&fit=crop" alt="Portfolio item" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110" loading="lazy">
+                        <div class="absolute inset-0 bg-charcoal/60 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
+                            <svg class="w-10 h-10 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0zM10 7v3m0 0v3m0-3h3m-3 0H7"/></svg>
+                        </div>
+                    </div>
+                    
+                    <div class="relative aspect-square overflow-hidden rounded-xl cursor-pointer group reveal col-span-2 row-span-2" data-src="https://images.unsplash.com/photo-1613490493576-7fde63acd811?w=800">
+                        <img src="https://images.unsplash.com/photo-1613490493576-7fde63acd811?w=800&h=800&fit=crop" alt="Portfolio item" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110" loading="lazy">
+                        <div class="absolute inset-0 bg-charcoal/60 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
+                            <svg class="w-10 h-10 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0zM10 7v3m0 0v3m0-3h3m-3 0H7"/></svg>
+                        </div>
+                    </div>
+                    
+                    <div class="relative aspect-square overflow-hidden rounded-xl cursor-pointer group reveal" data-src="https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?w=800">
+                        <img src="https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?w=400&h=400&fit=crop" alt="Portfolio item" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110" loading="lazy">
+                        <div class="absolute inset-0 bg-charcoal/60 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
+                            <svg class="w-10 h-10 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0zM10 7v3m0 0v3m0-3h3m-3 0H7"/></svg>
+                        </div>
+                    </div>
+                    
+                    <div class="relative aspect-square overflow-hidden rounded-xl cursor-pointer group reveal" data-src="https://images.unsplash.com/photo-1565008447742-97f6f38c985c?w=800">
+                        <img src="https://images.unsplash.com/photo-1565008447742-97f6f38c985c?w=400&h=400&fit=crop" alt="Portfolio item" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110" loading="lazy">
+                        <div class="absolute inset-0 bg-charcoal/60 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
+                            <svg class="w-10 h-10 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0zM10 7v3m0 0v3m0-3h3m-3 0H7"/></svg>
+                        </div>
+                    </div>
+                    
+                    <div class="relative aspect-square overflow-hidden rounded-xl cursor-pointer group reveal" data-src="https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?w=800">
+                        <img src="https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?w=400&h=400&fit=crop" alt="Portfolio item" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110" loading="lazy">
+                        <div class="absolute inset-0 bg-charcoal/60 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
+                            <svg class="w-10 h-10 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0zM10 7v3m0 0v3m0-3h3m-3 0H7"/></svg>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <!-- Testimonials Section -->
+        <section class="py-20 lg:py-32 bg-charcoal">
+            <div class="max-w-7xl mx-auto px-6">
+                <div class="text-center mb-12 reveal">
+                    <span class="text-gold font-semibold text-sm tracking-wider uppercase">Testimonials</span>
+                    <h2 class="font-display text-3xl sm:text-4xl lg:text-5xl font-bold text-white mt-4">
+                        What Our Clients Say
+                    </h2>
+                    <div class="section-divider mx-auto mt-6"></div>
+                </div>
+                
+                <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+                    <div class="bg-white rounded-2xl p-8 shadow-lg reveal">
+                        <div class="flex items-center gap-1 mb-4">
+                            <svg class="w-5 h-5 text-gold" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+                            <svg class="w-5 h-5 text-gold" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+                            <svg class="w-5 h-5 text-gold" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+                            <svg class="w-5 h-5 text-gold" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+                            <svg class="w-5 h-5 text-gold" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+                        </div>
+                        <p class="text-gray-600 mb-6">"DK Construction transformed our vision into reality. Their attention to detail and commitment to quality exceeded our expectations. Highly recommended!"</p>
+                        <div class="flex items-center gap-4">
+                            <div class="w-12 h-12 bg-gold/20 rounded-full flex items-center justify-center">
+                                <span class="font-bold text-gold">JM</span>
+                            </div>
+                            <div>
+                                <div class="font-semibold text-charcoal">James Mitchell</div>
+                                <div class="text-sm text-gray-500">Homeowner</div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="bg-white rounded-2xl p-8 shadow-lg reveal">
+                        <div class="flex items-center gap-1 mb-4">
+                            <svg class="w-5 h-5 text-gold" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+                            <svg class="w-5 h-5 text-gold" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+                            <svg class="w-5 h-5 text-gold" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+                            <svg class="w-5 h-5 text-gold" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+                            <svg class="w-5 h-5 text-gold" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+                        </div>
+                        <p class="text-gray-600 mb-6">"Professional team, excellent communication throughout the project. They delivered our office building on time and within budget. Will work with them again."</p>
+                        <div class="flex items-center gap-4">
+                            <div class="w-12 h-12 bg-gold/20 rounded-full flex items-center justify-center">
+                                <span class="font-bold text-gold">SC</span>
+                            </div>
+                            <div>
+                                <div class="font-semibold text-charcoal">Sarah Chen</div>
+                                <div class="text-sm text-gray-500">Business Owner</div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="bg-white rounded-2xl p-8 shadow-lg reveal">
+                        <div class="flex items-center gap-1 mb-4">
+                            <svg class="w-5 h-5 text-gold" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+                            <svg class="w-5 h-5 text-gold" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+                            <svg class="w-5 h-5 text-gold" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+                            <svg class="w-5 h-5 text-gold" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+                            <svg class="w-5 h-5 text-gold" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+                        </div>
+                        <p class="text-gray-600 mb-6">"The renovation of our heritage property was handled with utmost care and professionalism. DK Construction preserved the character while modernizing the space perfectly."</p>
+                        <div class="flex items-center gap-4">
+                            <div class="w-12 h-12 bg-gold/20 rounded-full flex items-center justify-center">
+                                <span class="font-bold text-gold">RP</span>
+                            </div>
+                            <div>
+                                <div class="font-semibold text-charcoal">Robert Parker</div>
+                                <div class="text-sm text-gray-500">Property Developer</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <!-- FAQ Section -->
+        <section class="py-20 lg:py-32 bg-white">
+            <div class="max-w-4xl mx-auto px-6">
+                <div class="text-center mb-12 reveal">
+                    <span class="text-gold font-semibold text-sm tracking-wider uppercase">FAQ</span>
+                    <h2 class="font-display text-3xl sm:text-4xl lg:text-5xl font-bold text-charcoal mt-4">
+                        Frequently Asked Questions
+                    </h2>
+                    <div class="section-divider mx-auto mt-6"></div>
+                </div>
+                
+                <div class="reveal">
+                    <div class="faq-item">
+                        <button class="faq-question">
+                            What types of construction projects do you handle?
+                            <svg class="w-5 h-5 text-gold" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
+                        </button>
+                        <div class="faq-answer">
+                            <p class="text-gray-600 pb-6">We handle a wide range of construction projects including residential homes, commercial buildings, industrial facilities, and renovation projects. Our team has expertise in new construction, remodeling, and restoration work.</p>
+                        </div>
+                    </div>
+                    
+                    <div class="faq-item">
+                        <button class="faq-question">
+                            How do I get a quote for my project?
+                            <svg class="w-5 h-5 text-gold" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
+                        </button>
+                        <div class="faq-answer">
+                            <p class="text-gray-600 pb-6">You can request a free quote by filling out our contact form, calling us directly, or sending us a message via WhatsApp. Our team will schedule a consultation to understand your requirements and provide a detailed estimate.</p>
+                        </div>
+                    </div>
+                    
+                    <div class="faq-item">
+                        <button class="faq-question">
+                            Are you licensed and insured?
+                            <svg class="w-5 h-5 text-gold" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
+                        </button>
+                        <div class="faq-answer">
+                            <p class="text-gray-600 pb-6">Yes, DK Construction is fully licensed and insured. We carry comprehensive liability insurance and workers' compensation coverage to protect our clients and team members throughout the construction process.</p>
+                        </div>
+                    </div>
+                    
+                    <div class="faq-item">
+                        <button class="faq-question">
+                            What is your typical project timeline?
+                            <svg class="w-5 h-5 text-gold" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
+                        </button>
+                        <div class="faq-answer">
+                            <p class="text-gray-600 pb-6">Project timelines vary based on scope and complexity. A typical residential project takes 6-12 months, while commercial projects may take longer. We provide detailed timelines during the planning phase and keep you updated throughout construction.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <!-- Contact Section -->
+        <section id="contact" class="py-20 lg:py-32 bg-pattern-light">
+            <div class="max-w-7xl mx-auto px-6">
+                <div class="text-center mb-12 reveal">
+                    <span class="text-gold font-semibold text-sm tracking-wider uppercase">Contact Us</span>
+                    <h2 class="font-display text-3xl sm:text-4xl lg:text-5xl font-bold text-charcoal mt-4">
+                        Start Your Project Today
+                    </h2>
+                    <div class="section-divider mx-auto mt-6"></div>
+                </div>
+                
+                <div class="grid lg:grid-cols-2 gap-12">
+                    <div class="reveal">
+                        <div class="bg-white rounded-2xl p-8 shadow-lg">
+                            <h3 class="font-display text-2xl font-bold text-charcoal mb-6">Get a Free Quote</h3>
+                            <form id="contactForm" class="space-y-6">
+                                <div class="grid sm:grid-cols-2 gap-6">
+                                    <div>
+                                        <label for="name" class="block text-sm font-medium text-gray-700 mb-2">Full Name</label>
+                                        <input type="text" id="name" name="name" class="form-input" placeholder="John Doe" required>
+                                    </div>
+                                    <div>
+                                        <label for="phone" class="block text-sm font-medium text-gray-700 mb-2">Phone Number</label>
+                                        <input type="tel" id="phone" name="phone" class="form-input" placeholder="+1 (555) 000-0000" required>
+                                    </div>
+                                </div>
+                                <div>
+                                    <label for="email" class="block text-sm font-medium text-gray-700 mb-2">Email Address</label>
+                                    <input type="email" id="email" name="email" class="form-input" placeholder="john@example.com" required>
+                                </div>
+                                <div>
+                                    <label for="projectType" class="block text-sm font-medium text-gray-700 mb-2">Project Type</label>
+                                    <select id="projectType" name="projectType" class="form-input" required>
+                                        <option value="">Select a project type</option>
+                                        <option value="residential">Residential Construction</option>
+                                        <option value="commercial">Commercial Construction</option>
+                                        <option value="renovation">Renovation & Remodeling</option>
+                                        <option value="interior">Interior Works</option>
+                                        <option value="other">Other</option>
+                                    </select>
+                                </div>
+                                <div>
+                                    <label for="message" class="block text-sm font-medium text-gray-700 mb-2">Project Details</label>
+                                    <textarea id="message" name="message" rows="4" class="form-input resize-none" placeholder="Tell us about your project..." required></textarea>
+                                </div>
+                                <button type="submit" class="btn-primary w-full">Submit Request</button>
+                            </form>
+                        </div>
+                    </div>
+                    
+                    <div class="reveal space-y-6">
+                        <div class="bg-white rounded-2xl p-6 shadow-lg flex items-start gap-4">
+                            <div class="w-12 h-12 bg-gold/10 rounded-xl flex items-center justify-center flex-shrink-0">
+                                <svg class="w-6 h-6 text-gold" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"/><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"/></svg>
+                            </div>
+                            <div>
+                                <h4 class="font-semibold text-charcoal mb-1">Our Location</h4>
+                                <p class="text-gray-600">123 Construction Avenue<br>New York, NY 10001</p>
+                            </div>
+                        </div>
+                        
+                        <div class="bg-white rounded-2xl p-6 shadow-lg flex items-start gap-4">
+                            <div class="w-12 h-12 bg-gold/10 rounded-xl flex items-center justify-center flex-shrink-0">
+                                <svg class="w-6 h-6 text-gold" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"/></svg>
+                            </div>
+                            <div>
+                                <h4 class="font-semibold text-charcoal mb-1">Phone</h4>
+                                <p class="text-gray-600">+1 (555) 123-4567<br>+1 (555) 765-4321</p>
+                            </div>
+                        </div>
+                        
+                        <div class="bg-white rounded-2xl p-6 shadow-lg flex items-start gap-4">
+                            <div class="w-12 h-12 bg-gold/10 rounded-xl flex items-center justify-center flex-shrink-0">
+                                <svg class="w-6 h-6 text-gold" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/></svg>
+                            </div>
+                            <div>
+                                <h4 class="font-semibold text-charcoal mb-1">Email</h4>
+                                <p class="text-gray-600">info@dkconstruction.com<br>quotes@dkconstruction.com</p>
+                            </div>
+                        </div>
+                        
+                        <div class="bg-white rounded-2xl p-6 shadow-lg flex items-start gap-4">
+                            <div class="w-12 h-12 bg-gold/10 rounded-xl flex items-center justify-center flex-shrink-0">
+                                <svg class="w-6 h-6 text-gold" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+                            </div>
+                            <div>
+                                <h4 class="font-semibold text-charcoal mb-1">Business Hours</h4>
+                                <p class="text-gray-600">Monday - Friday: 8:00 AM - 6:00 PM<br>Saturday: 9:00 AM - 2:00 PM</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <!-- CTA Section -->
+        <section class="py-20 bg-charcoal relative overflow-hidden">
+            <div class="max-w-4xl mx-auto px-6 text-center relative reveal">
+                <h2 class="font-display text-3xl sm:text-4xl lg:text-5xl font-bold text-white mb-6">
+                    Ready to Build Your Dream Project?
+                </h2>
+                <p class="text-gray-300 text-lg mb-8 max-w-2xl mx-auto">
+                    Let's discuss your construction needs. Our team is ready to turn your vision into reality.
+                </p>
+                <div class="flex flex-wrap justify-center gap-4">
+                    <a href="#contact" class="btn-primary">Get Free Quote</a>
+                    <a href="https://wa.me/15551234567?text=Hello%20DK%20Construction%2C%20I%20would%20like%20to%20discuss%20my%20construction%20project." target="_blank" class="btn-secondary">
+                        <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+                        WhatsApp Us
+                    </a>
+                </div>
+            </div>
+        </section>
+    </main>
+    
+    <!-- Footer -->
+    <footer class="bg-charcoal py-16 border-t border-white/10">
+        <div class="max-w-7xl mx-auto px-6">
+            <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-12 mb-12">
+                <div>
+                    <div class="flex items-center gap-3 mb-6">
+                        <div class="w-12 h-12 bg-gold rounded-lg flex items-center justify-center">
+                            <svg class="w-8 h-8 text-white" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2L2 7v10l10 5 10-5V7L12 2zm0 2.5L19 8l-7 3.5L5 8l7-3.5zM4 9.5l7 3.5v7l-7-3.5v-7zm16 0v7l-7 3.5v-7l7-3.5z"/></svg>
+                        </div>
+                        <span class="font-display text-xl font-bold text-white">DK Construction</span>
+                    </div>
+                    <p class="text-gray-400 mb-6">Building dreams into reality since 2009. Quality construction services for residential and commercial projects.</p>
+                </div>
+                
+                <div>
+                    <h4 class="font-display text-lg font-bold text-white mb-6">Quick Links</h4>
+                    <ul class="space-y-3">
+                        <li><a href="#home" class="text-gray-400 hover:text-gold transition-colors">Home</a></li>
+                        <li><a href="#about" class="text-gray-400 hover:text-gold transition-colors">About Us</a></li>
+                        <li><a href="#services" class="text-gray-400 hover:text-gold transition-colors">Services</a></li>
+                        <li><a href="#projects" class="text-gray-400 hover:text-gold transition-colors">Projects</a></li>
+                        <li><a href="#contact" class="text-gray-400 hover:text-gold transition-colors">Contact</a></li>
+                    </ul>
+                </div>
+                
+                <div>
+                    <h4 class="font-display text-lg font-bold text-white mb-6">Services</h4>
+                    <ul class="space-y-3">
+                        <li><a href="#services" class="text-gray-400 hover:text-gold transition-colors">Residential Construction</a></li>
+                        <li><a href="#services" class="text-gray-400 hover:text-gold transition-colors">Commercial Projects</a></li>
+                        <li><a href="#services" class="text-gray-400 hover:text-gold transition-colors">Renovation</a></li>
+                        <li><a href="#services" class="text-gray-400 hover:text-gold transition-colors">Interior Works</a></li>
+                    </ul>
+                </div>
+                
+                <div>
+                    <h4 class="font-display text-lg font-bold text-white mb-6">Contact Info</h4>
+                    <ul class="space-y-3 text-gray-400">
+                        <li class="flex items-center gap-2">
+                            <svg class="w-5 h-5 text-gold" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"/></svg>
+                            +1 (555) 123-4567
+                        </li>
+                        <li class="flex items-center gap-2">
+                            <svg class="w-5 h-5 text-gold" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/></svg>
+                            info@dkconstruction.com
+                        </li>
+                        <li class="flex items-center gap-2">
+                            <svg class="w-5 h-5 text-gold" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"/><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"/></svg>
+                            New York, NY 10001
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="pt-8 border-t border-white/10 flex flex-col sm:flex-row justify-between items-center gap-4">
+                <p class="text-gray-400 text-sm">&copy; 2024 DK Construction. All rights reserved.</p>
+                <div class="flex gap-4">
+                    <a href="#" class="text-gray-400 hover:text-gold text-sm">Privacy Policy</a>
+                    <a href="#" class="text-gray-400 hover:text-gold text-sm">Terms of Service</a>
+                </div>
             </div>
         </div>
     </footer>
+    
+    <!-- WhatsApp Button -->
+    <a href="https://wa.me/15551234567?text=Hello%20DK%20Construction%2C%20I%20would%20like%20to%20discuss%20my%20construction%20project." target="_blank" class="whatsapp-btn" aria-label="Chat on WhatsApp">
+        <svg class="w-8 h-8" fill="currentColor" viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+    </a>
+    
+    <!-- Back to Top -->
+    <button class="back-to-top" id="backToTop" aria-label="Back to top">
+        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 10l7-7m0 0l7 7m-7-7v18"/></svg>
+    </button>
+    
+    <!-- Lightbox -->
+    <div class="lightbox" id="lightbox">
+        <button class="lightbox-close" aria-label="Close lightbox">
+            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/></svg>
+        </button>
+        <img src="" alt="Lightbox image" id="lightboxImg">
+    </div>
 
-    <!-- WHATSAPP FLOAT -->
-    <a href="https://wa.me/918508502294" target="_blank" class="wa-float"><svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg></a>
+    <!-- JavaScript -->
+    <script>
+        // Hide loading screen
+        window.addEventListener('load', () => {
+            const loadingScreen = document.getElementById('loadingScreen');
+            if (loadingScreen) {
+                setTimeout(() => {
+                    loadingScreen.classList.add('hidden');
+                }, 500);
+            }
+        });
 
-    <!-- Scripts -->
-    <script src="assets/js/script.js"></script>
+        // Header scroll effect
+        const header = document.getElementById('header');
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 50) {
+                header.classList.add('header-scrolled');
+            } else {
+                header.classList.remove('header-scrolled');
+            }
+        });
+
+        // Mobile menu toggle
+        const hamburger = document.getElementById('hamburger');
+        const mobileMenu = document.getElementById('mobileMenu');
+        
+        if (hamburger && mobileMenu) {
+            hamburger.addEventListener('click', () => {
+                hamburger.classList.toggle('open');
+                mobileMenu.classList.toggle('open');
+            });
+            
+            // Close menu when clicking a link
+            mobileMenu.querySelectorAll('a').forEach(link => {
+                link.addEventListener('click', () => {
+                    hamburger.classList.remove('open');
+                    mobileMenu.classList.remove('open');
+                });
+            });
+        }
+
+        // Scroll reveal animation
+        const revealElements = document.querySelectorAll('.reveal');
+        
+        const revealOnScroll = () => {
+            revealElements.forEach(el => {
+                const elementTop = el.getBoundingClientRect().top;
+                const windowHeight = window.innerHeight;
+                
+                if (elementTop < windowHeight - 100) {
+                    el.classList.add('active');
+                }
+            });
+        };
+        
+        window.addEventListener('scroll', revealOnScroll);
+        window.addEventListener('load', revealOnScroll);
+
+        // Counter animation
+        const counters = document.querySelectorAll('.stat-number');
+        let counterAnimated = false;
+        
+        const animateCounters = () => {
+            counters.forEach(counter => {
+                const target = parseInt(counter.getAttribute('data-target'));
+                const duration = 2000;
+                const step = target / (duration / 16);
+                let current = 0;
+                
+                const updateCounter = () => {
+                    current += step;
+                    if (current < target) {
+                        counter.textContent = Math.floor(current) + '+';
+                        requestAnimationFrame(updateCounter);
+                    } else {
+                        counter.textContent = target + '+';
+                    }
+                };
+                
+                updateCounter();
+            });
+        };
+
+        // Trigger counter when in view
+        const statsSection = document.querySelector('.stat-number');
+        if (statsSection) {
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting && !counterAnimated) {
+                        counterAnimated = true;
+                        animateCounters();
+                    }
+                });
+            }, { threshold: 0.5 });
+            
+            observer.observe(statsSection.parentElement);
+        }
+
+        // Project filter
+        const filterBtns = document.querySelectorAll('.filter-btn');
+        const projectCards = document.querySelectorAll('#projectsGrid .project-card');
+        
+        filterBtns.forEach(btn => {
+            btn.addEventListener('click', () => {
+                filterBtns.forEach(b => b.classList.remove('active'));
+                btn.classList.add('active');
+                
+                const filter = btn.getAttribute('data-filter');
+                
+                projectCards.forEach(card => {
+                    const category = card.getAttribute('data-category');
+                    
+                    if (filter === 'all' || category === filter) {
+                        card.style.display = 'block';
+                        setTimeout(() => {
+                            card.style.opacity = '1';
+                            card.style.transform = 'translateY(0)';
+                        }, 50);
+                    } else {
+                        card.style.opacity = '0';
+                        card.style.transform = 'translateY(20px)';
+                        setTimeout(() => {
+                            card.style.display = 'none';
+                        }, 300);
+                    }
+                });
+            });
+        });
+
+        // Lightbox
+        const lightbox = document.getElementById('lightbox');
+        const lightboxImg = document.getElementById('lightboxImg');
+        const lightboxClose = document.querySelector('.lightbox-close');
+        const portfolioItems = document.querySelectorAll('#portfolioGrid > div');
+        
+        portfolioItems.forEach(item => {
+            item.addEventListener('click', () => {
+                const src = item.getAttribute('data-src');
+                lightboxImg.src = src;
+                lightbox.classList.add('open');
+            });
+        });
+        
+        if (lightboxClose) {
+            lightboxClose.addEventListener('click', () => {
+                lightbox.classList.remove('open');
+            });
+        }
+        
+        if (lightbox) {
+            lightbox.addEventListener('click', (e) => {
+                if (e.target === lightbox) {
+                    lightbox.classList.remove('open');
+                }
+            });
+        }
+
+        // FAQ Accordion
+        const faqItems = document.querySelectorAll('.faq-item');
+        
+        faqItems.forEach(item => {
+            const question = item.querySelector('.faq-question');
+            
+            question.addEventListener('click', () => {
+                const isOpen = item.classList.contains('open');
+                
+                faqItems.forEach(i => i.classList.remove('open'));
+                
+                if (!isOpen) {
+                    item.classList.add('open');
+                }
+            });
+        });
+
+        // Back to Top
+        const backToTop = document.getElementById('backToTop');
+        
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 500) {
+                backToTop.classList.add('visible');
+            } else {
+                backToTop.classList.remove('visible');
+            }
+        });
+        
+        if (backToTop) {
+            backToTop.addEventListener('click', () => {
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+            });
+        }
+
+        // Form submission
+        const contactForm = document.getElementById('contactForm');
+        
+        if (contactForm) {
+            contactForm.addEventListener('submit', (e) => {
+                e.preventDefault();
+                
+                // Get form data
+                const formData = new FormData(contactForm);
+                const data = Object.fromEntries(formData);
+                
+                // Show success message (in a real app, you'd send this to a server)
+                alert('Thank you for your inquiry! We will get back to you within 24 hours.');
+                contactForm.reset();
+            });
+        }
+
+        // Smooth scroll for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+    </script>
 </body>
 </html>
